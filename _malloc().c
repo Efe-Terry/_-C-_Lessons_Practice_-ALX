@@ -16,6 +16,8 @@
 * i.e   || int malloc(size * sizeof(int));
 * i.e   || char malloc(size * sizeof(char));
 *
+* i.e   || ptr = (cast-type*) malloc(byte-size)
+*
 */
 
 /*
@@ -40,6 +42,57 @@ void m(int n0, int n1, int n2)
 
 int main(void)
 {
+    /*i.e*/
+    /*type-cast int**/
+
+    int *ptr;
+    int n, i;
+
+    /*Ex-2*/
+    int *nn;
+
+    printf("Enter number of elements to be stored: \n");
+    scanf("%d", &n);
+    printf("Number of elements you entered: %d\n", n);
+
+    ptr = (int*)malloc(n * sizeof(int));
+
+    /*Ex-2 to show the effect of (int*)*/
+    nn = (int*)malloc(2 * sizeof(int)); /*Testing methods*/
+    nn[0] = 95;
+    nn[1] = 75;
+
+    /*check*/
+
+    if ( ptr == NULL )
+    {
+        printf("NO! Memory not allocated!\n");
+        exit(0);
+    }
+    else
+    {
+        printf("YES! Memory allocated successfully using malloc! \n");
+
+        /*Loop through the entered number*/
+        for ( i = 0; i < n; ++i )
+        {
+            ptr[i] = i++;
+        }
+
+        printf("The elements of the array are: %d\n", i );
+        for ( i = 0; i < n; ++i )
+        {
+            printf("%d \n", ptr[i]);
+        }
+    }
+
+    printf("nn is:\t nn[0]%d nn[1]2%d\n", nn[0], nn[1]);
+    printf("The address is:\t nn[0]%d nn[1]2%d\n", &nn[0], &nn[1]);
+
+    printf("Other Examples: \n");
+
+    /*Other examples..*/
+
     char *str;
 
     str = malloc(sizeof(char) * 3);
@@ -59,6 +112,8 @@ int main(void)
 
     free(tab);
     free(str);
+    free(ptr);
+    free(nn);
 
     m(9, 4, 18);
 
